@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amora Gastronomia</title>
+    <style>
+        /* Estilos da página de apresentação */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Cormorant Garamond', serif;
+            background-color: #000;
+            color: #fff;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+        }
+        
+        .intro-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.7)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            z-index: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 1.5s ease-out;
+        }
+        
+        .intro-content {
+            text-align: center;
+            opacity: 0;
+            transform: translateY(20px);
+            animation: fadeIn 1.5s ease-out forwards;
+            animation-delay: 0.5s;
+        }
+        
+        .main-title {
+            font-size: 5rem;
+            font-weight: 300;
+            letter-spacing: 3px;
+            margin-bottom: 10px;
+            color: #e8d5b5;
+        }
+        
+        .subtitle {
+            font-size: 1.2rem;
+            font-weight: 300;
+            letter-spacing: 8px;
+            text-transform: uppercase;
+            margin-bottom: 30px;
+            color: rgba(232, 213, 181, 0.7);
+        }
+        
+        .enter-btn {
+            background: transparent;
+            color: #e8d5b5;
+            border: 1px solid #e8d5b5;
+            padding: 12px 30px;
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1rem;
+            letter-spacing: 2px;
+            cursor: pointer;
+            transition: all 0.5s ease;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+            animation-delay: 2s;
+        }
+        
+        .enter-btn:hover {
+            background: rgba(232, 213, 181, 0.1);
+            letter-spacing: 4px;
+        }
+        
+        .signature {
+            position: absolute;
+            bottom: 40px;
+            right: 40px;
+            font-size: 0.9rem;
+            color: rgba(255, 255, 255, 0.5);
+            font-style: italic;
+            letter-spacing: 1px;
+            opacity: 0;
+            animation: fadeIn 1s ease-out forwards;
+            animation-delay: 2.5s;
+        }
+        
+        @keyframes fadeIn {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Quando a classe 'hidden' é adicionada */
+        .intro-overlay.hidden {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        /* Estilo do iframe que conterá o site principal */
+        #main-site {
+            width: 100%;
+            height: 100%;
+            border: none;
+            opacity: 0;
+            transition: opacity 1.5s ease;
+        }
+        
+        #main-site.loaded {
+            opacity: 1;
+        }
+    </style>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;500&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Página de apresentação -->
+    <div class="intro-overlay">
+        <div class="intro-content">
+            <h1 class="main-title">Amora Gastronomia</h1>
+            <p class="subtitle">Excelência em gastronomia</p>
+            <button class="enter-btn">Entrar</button>
+        </div>
+        <div class="signature">Joice Costa - Maitre e Gerente</div>
+    </div>
+    
+    <!-- Iframe que carregará o site principal -->
+    <iframe id="main-site" src="index.html"></iframe>
+    
+    <script>
+        // Espera o DOM carregar
+        document.addEventListener('DOMContentLoaded', function() {
+            const introOverlay = document.querySelector('.intro-overlay');
+            const enterBtn = document.querySelector('.enter-btn');
+            const mainSite = document.getElementById('main-site');
+            
+            // Carrega o site principal em segundo plano
+            mainSite.onload = function() {
+                mainSite.classList.add('loaded');
+            };
+            
+            // Ao clicar no botão, inicia a transição
+            enterBtn.addEventListener('click', function() {
+                introOverlay.classList.add('hidden');
+                
+                // Rola para o topo do site principal após a transição
+                setTimeout(() => {
+                    mainSite.contentWindow.scrollTo(0, 0);
+                }, 1500);
+            });
+            
+            // Também permite pular a intro após 5 segundos
+            setTimeout(() => {
+                enterBtn.click();
+            }, 5000);
+        });
+    </script>
+</body>
+</html>
