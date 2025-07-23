@@ -1,0 +1,841 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Amora Gastronomia - Buffet de Luxo</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;700&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary-color: #3a2e26;
+            --secondary-color: #e8d5b5;
+            --accent-color: #8b6b4a;
+            --text-color: #333333;
+            --light-bg: #f8f5f0;
+            --white: #ffffff;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Montserrat', sans-serif;
+            color: var(--text-color);
+            background-color: var(--light-bg);
+            line-height: 1.6;
+        }
+        
+        h1, h2, h3, h4 {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 500;
+            letter-spacing: 1px;
+        }
+        
+        /* Header */
+        header {
+            background: linear-gradient(rgba(58, 46, 38, 0.7), rgba(58, 46, 38, 0.7)), url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            color: var(--white);
+        }
+        
+        .logo {
+            font-size: 4.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+        }
+        
+        .tagline {
+            font-size: 1.8rem;
+            margin-bottom: 30px;
+            font-style: italic;
+            color: var(--secondary-color);
+            max-width: 800px;
+            padding: 0 20px;
+        }
+        
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background-color: var(--primary-color);
+            z-index: 1000;
+            padding: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        nav.scrolled {
+            padding: 15px 0;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .nav-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .nav-logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.8rem;
+            color: var(--secondary-color);
+            text-decoration: none;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+        }
+        
+        .nav-links li {
+            margin-left: 30px;
+        }
+        
+        .nav-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            font-size: 1rem;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+        
+        .nav-links a:hover {
+            color: var(--white);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--secondary-color);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+        
+        /* Button */
+        .btn {
+            display: inline-block;
+            background-color: var(--accent-color);
+            color: var(--white);
+            padding: 15px 30px;
+            text-decoration: none;
+            border-radius: 30px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+        }
+        
+        .btn:hover {
+            background-color: var(--primary-color);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+        
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--secondary-color);
+            color: var(--secondary-color);
+        }
+        
+        .btn-outline:hover {
+            background-color: var(--secondary-color);
+            color: var(--primary-color);
+        }
+        
+        /* Sections */
+        section {
+            padding: 100px 20px;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.8rem;
+            margin-bottom: 60px;
+            color: var(--primary-color);
+            position: relative;
+        }
+        
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 80px;
+            height: 2px;
+            background-color: var(--accent-color);
+            margin: 20px auto;
+        }
+        
+        /* About Section */
+        .about-content {
+            display: flex;
+            align-items: center;
+            gap: 50px;
+            margin-bottom: 50px;
+        }
+        
+        .about-text {
+            flex: 1;
+        }
+        
+        .about-text h3 {
+            font-size: 2rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .about-text p {
+            margin-bottom: 20px;
+            font-size: 1.1rem;
+        }
+        
+        .about-image {
+            flex: 1;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .about-image img {
+            width: 100%;
+            height: auto;
+            display: block;
+            transition: transform 0.5s ease;
+        }
+        
+        .about-image:hover img {
+            transform: scale(1.05);
+        }
+        
+        /* Gallery Section */
+        .gallery {
+            background-color: var(--white);
+        }
+        
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+        }
+        
+        .gallery-item {
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+            height: 300px;
+        }
+        
+        .gallery-item img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img {
+            transform: scale(1.1);
+        }
+        
+        .gallery-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: linear-gradient(to top, rgba(58, 46, 38, 0.8), transparent);
+            padding: 20px;
+            color: var(--white);
+            transform: translateY(100%);
+            transition: transform 0.3s ease;
+        }
+        
+        .gallery-item:hover .gallery-overlay {
+            transform: translateY(0);
+        }
+        
+        /* Menu Section */
+        .menu-tabs {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .menu-tab {
+            padding: 10px 25px;
+            margin: 0 10px 10px 0;
+            background-color: transparent;
+            border: 1px solid var(--accent-color);
+            color: var(--accent-color);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border-radius: 30px;
+        }
+        
+        .menu-tab.active, .menu-tab:hover {
+            background-color: var(--accent-color);
+            color: var(--white);
+        }
+        
+        .menu-content {
+            display: none;
+        }
+        
+        .menu-content.active {
+            display: block;
+        }
+        
+        .menu-category {
+            margin-bottom: 40px;
+        }
+        
+        .menu-category h3 {
+            font-size: 1.8rem;
+            color: var(--primary-color);
+            border-bottom: 1px solid var(--secondary-color);
+            padding-bottom: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .menu-item {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 15px;
+            padding-bottom: 10px;
+            border-bottom: 1px dashed #d7ccc8;
+        }
+        
+        .menu-item h4 {
+            font-size: 1.2rem;
+            color: var(--primary-color);
+            margin-bottom: 5px;
+        }
+        
+        .menu-item p {
+            font-size: 0.9rem;
+            color: #666;
+        }
+        
+        .price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.3rem;
+            color: var(--accent-color);
+            white-space: nowrap;
+            margin-left: 20px;
+        }
+        
+        /* Contact Section */
+        .contact-container {
+            display: flex;
+            gap: 50px;
+        }
+        
+        .contact-info {
+            flex: 1;
+        }
+        
+        .contact-info h3 {
+            font-size: 1.8rem;
+            margin-bottom: 20px;
+            color: var(--primary-color);
+        }
+        
+        .contact-details {
+            margin-bottom: 30px;
+        }
+        
+        .contact-details p {
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+        }
+        
+        .contact-details i {
+            margin-right: 15px;
+            color: var(--accent-color);
+            font-size: 1.2rem;
+            width: 20px;
+            text-align: center;
+        }
+        
+        .contact-form {
+            flex: 1;
+        }
+        
+        .form-group {
+            margin-bottom: 20px;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+        
+        .form-control {
+            width: 100%;
+            padding: 12px 15px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+        
+        .form-control:focus {
+            outline: none;
+            border-color: var(--accent-color);
+        }
+        
+        textarea.form-control {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .map-container {
+            height: 400px;
+            margin-top: 50px;
+            border-radius: 5px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+        }
+        
+        .map-container iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        /* Footer */
+        footer {
+            background-color: var(--primary-color);
+            color: var(--secondary-color);
+            padding: 60px 0 30px;
+            text-align: center;
+        }
+        
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        .footer-logo {
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            color: var(--secondary-color);
+        }
+        
+        .footer-social {
+            margin: 30px 0;
+        }
+        
+        .footer-social a {
+            color: var(--secondary-color);
+            font-size: 1.5rem;
+            margin: 0 15px;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-social a:hover {
+            color: var(--white);
+        }
+        
+        .footer-links {
+            display: flex;
+            justify-content: center;
+            list-style: none;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .footer-links li {
+            margin: 0 15px 10px;
+        }
+        
+        .footer-links a {
+            color: var(--secondary-color);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+        
+        .footer-links a:hover {
+            color: var(--white);
+        }
+        
+        .copyright {
+            margin-top: 30px;
+            padding-top: 30px;
+            border-top: 1px solid rgba(232, 213, 181, 0.2);
+            font-size: 0.9rem;
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .about-content {
+                flex-direction: column;
+            }
+            
+            .contact-container {
+                flex-direction: column;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .logo {
+                font-size: 3.5rem;
+            }
+            
+            .tagline {
+                font-size: 1.4rem;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <a href="#" class="nav-logo">Amora Gastronomia</a>
+            <ul class="nav-links">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#gallery">Galeria</a></li>
+                <li><a href="#menu">Cardápios</a></li>
+                <li><a href="#contact">Contato</a></li>
+            </ul>
+        </div>
+    </nav>
+    
+    <!-- Header -->
+    <header id="home">
+        <h1 class="logo">Amora Gastronomia</h1>
+        <p class="tagline">Excelência gastronômica para momentos memoráveis</p>
+        <a href="#contact" class="btn btn-outline">Reserve seu evento</a>
+    </header>
+    
+    <!-- About Section -->
+    <section id="about" class="about">
+        <div class="container">
+            <h2 class="section-title">Nossa Essência</h2>
+            <div class="about-content">
+                <div class="about-text">
+                    <h3>Uma história de paixão pela gastronomia</h3>
+                    <p>Fundada em 2010, a Amora Gastronomia nasceu da paixão por criar experiências culinárias excepcionais. Nossa missão é transformar eventos em momentos inesquecíveis através da alta gastronomia, atendimento impecável e ambientes sofisticados.</p>
+                    <p>Com uma equipe de chefs renomados e sommeliers especializados, oferecemos uma jornada sensorial única, onde cada detalhe é cuidadosamente planejado para superar expectativas.</p>
+                    <p>Nossos valores se baseiam na excelência, autenticidade e na criação de memórias gastronômicas que permanecem para sempre no paladar e no coração de nossos clientes.</p>
+                </div>
+                <div class="about-image">
+                    <img src="A casa salão1.jpg">
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Gallery Section -->
+    <section id="gallery" class="gallery">
+        <div class="container">
+            <h2 class="section-title">Nossos Momentos</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="Amroa pratos1.jpg" alt="Prato sofisticado">
+                    <div class="gallery-overlay">
+                        <h3>Pratos Signature</h3>
+                        <p>Criações exclusivas de nossos chefs</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="Salão3.jpg">
+                    <div class="gallery-overlay">
+                        <h3>Buffet Completo</h3>
+                        <p>Variedade e sofisticação</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="salçao2.jpg">
+                    <div class="gallery-overlay">
+                        <h3>Ambiente Elegante</h3>
+                        <p>Decoração refinada para seu evento</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="Amoradrinks1.jpg" alt="Sobremesas finas">
+                    <div class="gallery-overlay">
+                        <h3>Os melhores Drinks</h3>
+                        <p>Refinado, Completo, Perfeito</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1428515613728-6b4607e44363?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Vinhos selecionados">
+                    <div class="gallery-overlay">
+                        <h3>Harmonizações</h3>
+                        <p>Seleção de vinhos premium</p>
+                    </div>
+                </div>
+                <div class="gallery-item">
+                    <img src="https://images.unsplash.com/photo-1527529482837-4698179dc6ce?ixlib=rb-1.2.1&auto=format&fit=crop&w=1350&q=80" alt="Evento corporativo">
+                    <div class="gallery-overlay">
+                        <h3>Eventos Corporativos</h3>
+                        <p>Profissionalismo e excelência</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Menu Section -->
+    <section id="menu" class="menu">
+        <div class="container">
+            <h2 class="section-title">Nossos Cardápios</h2>
+            <div class="menu-tabs">
+                <button class="menu-tab active" data-target="wedding">Casamentos</button>
+                <button class="menu-tab" data-target="corporate">Corporativos</button>
+                <button class="menu-tab" data-target="social">Confraternizações</button>
+            </div>
+            
+            <div id="wedding" class="menu-content active">
+                <div class="menu-category">
+                    <h3>Entradas</h3>
+                    <div class="menu-item">
+                        <div>
+                            <h4>Canapés de Salmão com Caviar</h4>
+                            <p>Salmão defumado, cream cheese, caviar e endro</p>
+                        </div>
+                        <span class="price">-</span>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <h4>Tartare de Atum com Abacate</h4>
+                            <p>Atum fresco, abacate, gergelim e molho de soja especial</p>
+                        </div>
+                        <span class="price">-</span>
+                    </div>
+                </div>
+                
+                <div class="menu-category">
+                    <h3>Pratos Principais</h3>
+                    <div class="menu-item">
+                        <div>
+                            <h4>Filé Mignon Wellington</h4>
+                            <p>Filé mignon envolto em massa folhada com patê de cogumelos</p>
+                        </div>
+                        <span class="price">-</span>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <h4>Risoto de Lagosta</h4>
+                            <p>Arroz arbóreo com lagosta, açafrão e queijo parmesão</p>
+                        </div>
+                        <span class="price">-</span>
+                    </div>
+                </div>
+                
+                <div class="menu-category">
+                    <h3>Sobremesas</h3>
+                    <div class="menu-item">
+                        <div>
+                            <h4>Macaron Tower</h4>
+                            <p>Torre de macarons com sabores variados</p>
+                        </div>
+                        <span class="price">-</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="corporate" class="menu-content">
+                <div class="menu-category">
+                    <h3>Opções Executivas</h3>
+                    <div class="menu-item">
+                        <div>
+                            <h4>Buffet Completo Premium</h4>
+                            <p>5 opções de entradas, 4 pratos principais, 3 sobremesas</p>
+                        </div>
+                        <span class="price">-</span>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <h4>Coffee Break Deluxe</h4>
+                            <p>Seleção de cafés especiais, chás, pães artesanais e doces finos</p>
+                        </div>
+                        <span class="price">-</span>
+                    </div>
+                </div>
+            </div>
+            
+            <div id="social" class="menu-content">
+                <div class="menu-category">
+                    <h3>Opções para Festas</h3>
+                    <div class="menu-item">
+                        <div>
+                            <h4>Buffet Completo Social</h4>
+                            <p>4 opções de entradas, 3 pratos principais, 2 sobremesas</p>
+                        </div>
+                        <span class="price">-</span>
+                    </div>
+                    <div class="menu-item">
+                        <div>
+                            <h4>Rodízio de Carnes Nobres</h4>
+                            <p>5 cortes especiais acompanhados de 8 acompanhamentos</p>
+                        </div>
+                        <span class="price">-</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Reserve seu Evento</h2>
+            <div class="contact-container">
+                <div class="contact-info">
+                    <h3>Entre em Contato</h3>
+                    <div class="contact-details">
+                        <p><i class="fas fa-map-marker-alt"></i> Av. Gourmet, 123 - Jardins, São Paulo - SP</p>
+                        <p><i class="fas fa-phone"></i> (11) 97777-7777</p>
+                        <p><i class="fas fa-envelope"></i> contato@amoragastronomia.com</p>
+                        <p><i class="fas fa-clock"></i> atendimento Personalizado</p>
+                    </div>
+                    <h3>Redes Sociais</h3>
+                    <div class="social-links">
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-whatsapp"></i></a>
+                    </div>
+                </div>
+                <div class="contact-form">
+                    <form>
+                        <div class="form-group">
+                            <label for="name">Nome</label>
+                            <input type="text" id="name" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="email">E-mail</label>
+                            <input type="email" id="email" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="phone">Telefone</label>
+                            <input type="tel" id="phone" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="event-type">Tipo de Evento</label>
+                            <select id="event-type" class="form-control" required>
+                                <option value="">Selecione...</option>
+                                <option value="wedding">Casamento</option>
+                                <option value="corporate">Evento Corporativo</option>
+                                <option value="social">Confraternização</option>
+                                <option value="other">Outro</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="date">Data do Evento</label>
+                            <input type="date" id="date" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="message">Mensagem</label>
+                            <textarea id="message" class="form-control"></textarea>
+                        </div>
+                        <button type="submit" class="btn">Enviar Reserva</button>
+                    </form>
+                </div>
+            </div>
+            <div class="map-container">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3657.197584455614!2d-46.65867598502222!3d-23.561346184684013!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x94ce59c8da0aa315%3A0xd59f9431f2c9776a!2sAv.%20Paulista%2C%20S%C3%A3o%20Paulo%20-%20SP!5e0!3m2!1spt-BR!2sbr!4v1629834296285!5m2!1spt-BR!2sbr" allowfullscreen="" loading="lazy"></iframe>
+            </div>
+        </div>
+    </section>
+    
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <h2 class="footer-logo">Amora Gastronomia</h2>
+            <p>Excelência gastronômica para momentos memoráveis</p>
+            <div class="footer-social">
+                <a href="#"><i class="fab fa-instagram"></i></a>
+                <a href="#"><i class="fab fa-facebook-f"></i></a>
+                <a href="#"><i class="fab fa-pinterest-p"></i></a>
+                <a href="#"><i class="fab fa-whatsapp"></i></a>
+            </div>
+            <ul class="footer-links">
+                <li><a href="#home">Início</a></li>
+                <li><a href="#about">Sobre</a></li>
+                <li><a href="#gallery">Galeria</a></li>
+                <li><a href="#menu">Cardápios</a></li>
+                <li><a href="#contact">Contato</a></li>
+                <li><a href="#">Política de Privacidade</a></li>
+            </ul>
+            <p class="copyright">© 2023 Amora Gastronomia. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+    
+    <script>
+        // Navbar scroll effect
+        window.addEventListener('scroll', function() {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+        
+        // Menu tabs functionality
+        const tabs = document.querySelectorAll('.menu-tab');
+        tabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Remove active class from all tabs and contents
+                document.querySelectorAll('.menu-tab').forEach(t => t.classList.remove('active'));
+                document.querySelectorAll('.menu-content').forEach(c => c.classList.remove('active'));
+                
+                // Add active class to clicked tab and corresponding content
+                tab.classList.add('active');
+                const target = tab.getAttribute('data-target');
+                document.getElementById(target).classList.add('active');
+            });
+        });
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+    </script>
+</body>
+</html>
